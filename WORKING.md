@@ -38,6 +38,8 @@ A time str in 24 hr format i.e: for above inputs
 
 5. starting post meridiem and end ante meridiem e.g 5 PM to 9 AM
 
+6. Invalid format i.e '4:78 AM to 2:60 PM'
+
 tests =
 [
 
@@ -74,6 +76,10 @@ tests =
     {
         input: "7:00 PM to 4:00 AM",
         output: "19:00 to 04:00"
+    },
+    {
+        input: "7:60 AM to 5:67 PM",
+        output: raise ValueError
     }
 ]
 
