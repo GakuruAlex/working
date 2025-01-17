@@ -7,7 +7,8 @@ from working import convert
     ("9:00 AM to 5 PM", "09:00 to 17:00"),
     ("9:40 AM to 5:30 PM", "09:40 to 17:30"),
     ("9 AM to 12:59 PM", "09:00 to 12:59"),
-    ("12:00 AM to 12:00 PM", "00:00 to 12:00")
+    ("12:00 AM to 12:00 PM", "00:00 to 12:00"),
+    ("11:59 AM to 11:59 PM", "11:59 to 23:59")
 ])
 def test_convert_start_ante_to_post_meridiem(hours, converted_hours):
     assert convert(hours) == converted_hours
