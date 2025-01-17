@@ -6,6 +6,8 @@ from working import convert
     ("9 AM to 5 PM", "09:00 to 17:00"),
     ("9:00 AM to 5 PM", "09:00 to 17:00"),
     ("9:40 AM to 5:30 PM", "09:40 to 17:30"),
+    ("9 AM to 12:59 PM", "09:00 to 12:59"),
+    ("12:00 AM to 12:00 PM", "00:00 to 12:00")
 ])
 def test_convert_start_ante_to_post_meridiem(hours, converted_hours):
     assert convert(hours) == converted_hours
@@ -14,7 +16,9 @@ def test_convert_start_ante_to_post_meridiem(hours, converted_hours):
 @pytest.mark.parametrize("hours, converted_hours", [
     ("7 PM to 4 AM", "19:00 to 04:00"),
     ("10:15 PM to 6:30 AM", "22:15 to 06:30"),
-    ("11:55 PM to 8 AM", "23:55 to 08:00")
+    ("11:55 PM to 8 AM", "23:55 to 08:00"),
+    ("12 PM to 12 AM", "12:00 to 00:00"),
+    ("7 PM to 2 AM", "19:00 to 02:00")
 ])
 def test_convert_starting_post_to_ante_meridiem(hours, converted_hours):
     assert convert(hours) == converted_hours
