@@ -6,6 +6,54 @@ Implement a function called convert that expects a str in any of the 12-hour for
 
 [solution readme](WORKING.md)
 
+# Prerequisite #
+
+Clone the repo
+
+```bash
+    git clone https://github.com/GakuruAlex/working.git
+```
+
+Change directory into the project 
+
+```bash
+    cd working
+```
+
+Create a virtual environemt
+
+```bash
+    python3 -m venv envname
+```
+
+Activate virtual environment
+
+```bash
+    source envname/bin/activate
+```
+
+Install requirements
+
+```bash
+    pip install -r requirements.txt
+```
+
+# Usage #
+
+From project dir in terminal
+
+```bash
+    python3 working.py
+```
+to run the program
+
+
+```bash
+    pytest -v
+```
+
+to run the tests
+
 # Author #
 
 [Alex Gakuru](https://github.com/GakuruAlex)
