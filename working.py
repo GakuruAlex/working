@@ -15,6 +15,8 @@ def make_time_str(hour: int, minutes: int, meridiem: str) -> str:
     Example:
         >>> make_time_str(1, 43, 'AM')
             '01:43'
+        >>> make_time_str(11, 59, 'PM')
+            '23:59'
     """
     if hour < 10 and meridiem == 'AM':
         hour = f'0{hour}'
@@ -32,6 +34,23 @@ def make_time_str(hour: int, minutes: int, meridiem: str) -> str:
 
 
 def convert(hours: str) -> str:
+    """_Search through a given str and capture the working suration_
+
+    Args:
+        hours (str): _Working duration i.e '7 AM to 5 PM'_
+
+    Raises:
+        ValueError: _If hour given is invalid i.e not between 1 and 12_
+        ValueError: _If given minutes are not within 0 - 59_
+        ValueError: _If str contains no time duration_
+
+    Returns:
+        str: _Duration converted from 12 hr format to 24 hr format_
+    
+    Example:
+        >>> convert('9 AM to 6 PM')
+            '09:00 to 18:00'
+    """
 
     pattern = r'(?P<begin_hour>[0-9]*)(?::(?P<begin_minutes>[0-9]*))?\s(?P<begining_meridiem>AM|PM){1}\sto\s'\
               r'(?P<ending_hour>[0-9]*)(?::(?P<ending_minutes>[0-9]*))?\s(?P<ending_meridiem>AM|PM){1}'
