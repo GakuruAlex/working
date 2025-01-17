@@ -19,10 +19,19 @@ def test_convert_start_ante_to_post_meridiem(hours, converted_hours):
 def test_convert_starting_post_to_ante_meridiem(hours, converted_hours):
     assert convert(hours) == converted_hours
 
-#Test raisess ValueErro for invlid time
+
 def test_convert_with_invalid_hours():
     with pytest.raises(ValueError):
         convert("7:66 AM to 5:00 PM")
+    with pytest.raises(ValueError):
+        convert("7::00 AM to 5:00 PM")
+    with pytest.raises(ValueError):
+        convert("700 AM to 5:00 PM")
+    with pytest.raises(ValueError):
+        convert("7:00 AMPM to 5:00 PM")
+    with pytest.raises(ValueError):
+        convert("7:00 AMAM to 5:00 PM")
+
 
 #Test for failure
 @pytest.mark.xfail(reason="This test is meant to fail. Show test will fail on invalid result")
