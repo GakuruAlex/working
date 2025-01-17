@@ -38,6 +38,8 @@ def test_convert_with_invalid_hours():
         convert("7:00 AMAM to 5:00 PM")
     with pytest.raises(ValueError):
         convert("7:2222 AM to 5:00 PM")
+    with pytest.raises(ValueError):
+        convert("7 AM 1 PM")
 
 
 #Test for failure
