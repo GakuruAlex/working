@@ -4,13 +4,13 @@ from re import match, IGNORECASE
 def make_time_str(hour: int, minutes: int, meridiem: str) -> str:
     if hour < 10 and meridiem == 'AM':
         hour = f'0{hour}'
-    elif hour >= 10 and meridiem == 'PM':
+    elif hour > 0 and meridiem == 'PM':
         hour = f'{12 + hour}'
 
     if minutes:
-        return f'{hour}:{minutes} {meridiem}'
+        return f'{hour}:{minutes}'
     else:
-        return f'{hour}:00 {meridiem}'
+        return f'{hour}:00'
 
 
 def convert(hours: str) -> str:
@@ -21,27 +21,23 @@ def convert(hours: str) -> str:
     time_match = match(pattern=pattern, string=hours, flags=IGNORECASE)
     if time_match:
         begin_hour = int(time_match.group('begin_hour'))
-        begin_minutes = int(time_match.group('begin_minutes'))
+        begin_minutes = int(time_match.group('begin_minutes')) if time_match.group('begin_minutes') else None
         begin_meridiem = time_match.group('begining_meridiem')
         ending_hour = int(time_match.group('ending_hour'))
-        ending_minutes = int(time_match.group('ending_minutes'))
+        ending_minutes = int(time_match.group('ending_minutes')) if time_match.group('ending_minutes') else None
         ending_meridiem = time_match.group('ending_meridiem')
-    
-    if (begin_hour and begin_hour < 1 and begin_hour > 12) or (ending_hour and ending_hour < 1 and begin_hour > 12):
+    else:
         raise ValueError
-    if (begin_minutes and begin_minutes < 0 and begin_minutes > 59) or (ending_minutes and ending_minutes < 0 and ending_minutes > 59):
+    
+    if (begin_hour and (begin_hour < 1 or begin_hour > 12)) or (ending_hour and (ending_hour < 1 or begin_hour > 12)):
+        raise ValueError
+    if (begin_minutes and (begin_minutes < 0 or begin_minutes > 59)) or (ending_minutes and (ending_minutes < 0 or ending_minutes > 59)):
         raise ValueError
     
     return make_time_str(begin_hour, begin_minutes, begin_meridiem) +' to '+ make_time_str(ending_hour, ending_minutes, ending_meridiem)
-    
-   
-    
-  
 
-
-    return time_match
 def main()->None:
-    hours: str = '12:40 AM to 1:00 PM'
+    hours: str = '9:40 AM to 11:59 PM'
     print(convert(hours))
     #print(convert(input("Hours: ")))
 
