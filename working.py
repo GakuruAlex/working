@@ -34,7 +34,7 @@ def make_time_str(hour: int, minutes: int, meridiem: str) -> str:
 
 
 def convert(hours: str) -> str:
-    """_Search through a given str and capture the working suration_
+    """_Search through a given str and capture the working duration_
 
     Args:
         hours (str): _Working duration i.e '7 AM to 5 PM'_
