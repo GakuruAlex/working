@@ -31,12 +31,21 @@ def test_convert_with_invalid_hours():
         convert("7:00 AMPM to 5:00 PM")
     with pytest.raises(ValueError):
         convert("7:00 AMAM to 5:00 PM")
+    with pytest.raises(ValueError):
+        convert("7:2222 AM to 5:00 PM")
 
 
 #Test for failure
 @pytest.mark.xfail(reason="This test is meant to fail. Show test will fail on invalid result")
 def test_convert_for_failure():
     assert convert("8 AM to 6 PM") == "8:00 AM to 6:00 PM"
+
+#Test raising ValueError for correct time str
+@pytest.mark.xfail(reason="Testing that correct time doesn't raise ValueError")
+def test_convert_not_raising_value_error_with_correct_time():
+    with pytest.raises(ValueError):
+        convert("7:59 AM to 4:59 PM")
+
 
 
 
