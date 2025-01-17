@@ -2,6 +2,20 @@ from re import match,search, IGNORECASE
 
 
 def make_time_str(hour: int, minutes: int, meridiem: str) -> str:
+    """_Generate the correct 24 time format_
+
+    Args:
+        hour (int): _hour as in the 12 hr clock_
+        minutes (int): _minutes as in the clock_
+        meridiem (str): _Whether it's morning or afternoon_
+
+    Returns:
+        str: _24 hr time str_
+    
+    Example:
+        >>> make_time_str(1, 43, 'AM')
+            '01:43'
+    """
     if hour < 10 and meridiem == 'AM':
         hour = f'0{hour}'
     elif hour >= 10 and hour < 12 and meridiem == 'AM':
