@@ -1,11 +1,15 @@
-from re import match, IGNORECASE
+from re import match,search, IGNORECASE
 
 
 def make_time_str(hour: int, minutes: int, meridiem: str) -> str:
     if hour < 10 and meridiem == 'AM':
         hour = f'0{hour}'
-    elif hour > 0 and meridiem == 'PM':
+    elif hour >= 10 and hour < 12 and meridiem == 'AM':
+        hour = str(hour)
+    elif hour > 0 and hour < 12 and meridiem == 'PM':
         hour = f'{12 + hour}'
+    elif hour == 12 and meridiem == 'AM':
+        hour = f"00"
 
     if minutes:
         return f'{hour}:{minutes}'
@@ -15,10 +19,10 @@ def make_time_str(hour: int, minutes: int, meridiem: str) -> str:
 
 def convert(hours: str) -> str:
 
-    pattern = r'^(?P<begin_hour>[0-9]*)(?::(?P<begin_minutes>[0-9]*))?\s(?P<begining_meridiem>AM|PM){1}\sto\s'\
-              r'(?P<ending_hour>[0-9]*)(?::(?P<ending_minutes>[0-9]*))?\s(?P<ending_meridiem>AM|PM){1}$'
+    pattern = r'(?P<begin_hour>[0-9]*)(?::(?P<begin_minutes>[0-9]*))?\s(?P<begining_meridiem>AM|PM){1}\sto\s'\
+              r'(?P<ending_hour>[0-9]*)(?::(?P<ending_minutes>[0-9]*))?\s(?P<ending_meridiem>AM|PM){1}'
 
-    time_match = match(pattern=pattern, string=hours, flags=IGNORECASE)
+    time_match = search(pattern=pattern, string=hours, flags=IGNORECASE)
     if time_match:
         begin_hour = int(time_match.group('begin_hour'))
         begin_minutes = int(time_match.group('begin_minutes')) if time_match.group('begin_minutes') else None
@@ -37,9 +41,9 @@ def convert(hours: str) -> str:
     return make_time_str(begin_hour, begin_minutes, begin_meridiem) +' to '+ make_time_str(ending_hour, ending_minutes, ending_meridiem)
 
 def main()->None:
-    hours: str = '9:40 AM to 11:59 PM'
-    print(convert(hours))
-    #print(convert(input("Hours: ")))
+    #hours: str = 'I work from 9 PM to 4 PM'
+    #print(convert(hours))
+    print(convert(input("Hours: ")))
 
 if __name__ =="__main__":
     main()
