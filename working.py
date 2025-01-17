@@ -27,12 +27,13 @@ def convert(hours: str) -> str:
         ending_minutes = int(time_match.group('ending_minutes'))
         ending_meridiem = time_match.group('ending_meridiem')
     
-    if begin_hour and begin_hour < 1 and begin_hour > 12 or ending_hour and ending_hour < 1 and begin_hour > 12:
+    if (begin_hour and begin_hour < 1 and begin_hour > 12) or (ending_hour and ending_hour < 1 and begin_hour > 12):
         raise ValueError
-    if begin_minutes and begin_minutes < 0 and begin_minutes > 59 or ending_minutes and ending_minutes < 0 and ending_minutes > 59:
+    if (begin_minutes and begin_minutes < 0 and begin_minutes > 59) or (ending_minutes and ending_minutes < 0 and ending_minutes > 59):
         raise ValueError
-    if begin_minutes and begin_meridiem == 'AM':
-        begin_time: str = f'0{begin_hour}:{begin_minutes}' if begin_hour < 10 else f'{begin_hour}:{begin_minutes}'
+    
+    return make_time_str(begin_hour, begin_minutes, begin_meridiem) +' to '+ make_time_str(ending_hour, ending_minutes, ending_meridiem)
+    
    
     
   
