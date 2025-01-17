@@ -6,8 +6,6 @@ Whereas most countries use a 24-hour clock, the United States tends to use a 12-
 
 Find the 24 hr str equivalent of a given time in 12 hr str format.
 
-
-
 ## Input ##
 
 A time str in 12 hr format i.e: 
